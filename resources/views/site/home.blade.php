@@ -40,37 +40,6 @@
             </div>
         </div>
 
-        @if($projects->count())
-            @php $lead = $projects->first(); @endphp
-            <div class="hero__card" data-reveal data-delay="2">
-                <a href="{{ $lead->url() }}" class="hero-project">
-                    <div class="hero-project__img">
-                        @if(has_media($lead->image))
-                            <img src="{{ media_url($lead->image) }}" alt="{{ $lead->title }}" width="560" height="380" fetchpriority="high">
-                        @else
-                            <span class="hero-project__ph"><x-icon name="building" :size="54" :stroke="1.25" /></span>
-                        @endif
-                        <span class="badge">{{ $lead->category?->name ?? 'Featured project' }}</span>
-                    </div>
-                    <div class="hero-project__body">
-                        <p class="hero-project__label">Featured project</p>
-                        <h2 class="hero-project__title">{{ $lead->title }}</h2>
-                        <p class="hero-project__meta">
-                            @if($lead->client)<span><x-icon name="building" :size="15" /> {{ $lead->client }}</span>@endif
-                        </p>
-                        <span class="link-arrow">View project <x-icon name="arrow-up-right" :size="16" /></span>
-                    </div>
-                </a>
-                <div class="hero__mini">
-                    @foreach($projects->skip(1)->take(2) as $p)
-                        <a href="{{ $p->url() }}" class="hero__mini-item">
-                            <span class="hero__mini-cat">{{ $p->category?->name }}</span>
-                            <span class="hero__mini-title">{{ $p->title }}</span>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        @endif
     </div>
 </section>
 
