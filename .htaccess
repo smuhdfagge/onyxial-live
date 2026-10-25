@@ -1,0 +1,13 @@
+# Only used when the hosting account can't point the domain at the /public folder
+# (common on cPanel). It forwards every request into /public and blocks
+# direct access to the app's private files.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(\.env|\.git|composer\.(json|lock)|artisan|storage|vendor|database|app|config|routes|resources|bootstrap)(/|$) - [F,L,NC]
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
